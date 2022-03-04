@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>calculate angle</h1>
+
+    <input type="number" name="h" id="h" /><br />
+    <input type="number" name="m" id="m" /><br />
+    <p id="demo"></p>
+    <button
+      onclick="calcAngle(document.getElementById('h').value,document.getElementById('m').value)"
+    >
+      submit
+    </button>
+
+    <script>
+      function calcAngle(h, m) {
+        function min(x, y) {
+          return x < y ? x : y;
+        }
+        if (h < 0 || m < 0 || h > 12 || m > 60)
+          document.getElementById("demo").innerHTML = "wrong";
+        if (h == 12) h = 0;
+        if (m == 60) {
+          m = 0;
+          h += 1;
+          if (h > 12) h = h - 12;
+        }
+        let hour_angle = 0.5 * (h * 60 + m);
+        let minute_angle = 6 * m;
+
+        let search = Math.abs(hour_angle - minute_angle);
+
+        search = min(360 - search, search);
+        document.getElementById("demo").innerHTML = search;
+        console.log(search);
+        return search;
+      }
+
+      console.log(new Date());
+    </script>
+  </body>
+</html>
